@@ -1,0 +1,20 @@
+# Optional blueprint for Render (render.com). Other hosts that run Docker work the same way.
+# Run ONE instance only (numInstances: 1): the app keeps its working memory in RAM.
+services:
+  - type: web
+    name: proposal-studio
+    runtime: docker
+    plan: starter
+    numInstances: 1
+    healthCheckPath: /healthz
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: SETUP_TOKEN          # used once for /setup, then delete it
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1
+      # After /setup, add APP_USER, APP_PASSWORD_HASH, TOTP_SECRET in the dashboard.
+      # ALLOWED_HOSTS is filled automatically on Render; set it yourself on other hosts.

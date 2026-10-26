@@ -1,0 +1,8 @@
+.env
+.venv
+tests
+*.docx
+*.pdf
+*.zip
+__pycache__
+.git
